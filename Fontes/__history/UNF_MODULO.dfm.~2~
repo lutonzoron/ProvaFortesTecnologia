@@ -1,0 +1,5 @@
+object DTM_Modulo: TDTM_Modulo
+  OldCreateOrder = False
+  Height = 399
+  Width = 592
+end

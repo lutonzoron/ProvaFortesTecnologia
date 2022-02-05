@@ -1,0 +1,69 @@
+unit UNF_Principal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus;
+
+type
+  TFRM_Principal = class(TForm)
+    MainMenu1: TMainMenu;
+    Cadastros1: TMenuItem;
+    CadastrodeTanque1: TMenuItem;
+    CadastrodeBomba1: TMenuItem;
+    CadastrodeCombustvel1: TMenuItem;
+    N1: TMenuItem;
+    Paramtros1: TMenuItem;
+    Relatrios1: TMenuItem;
+    Relatriode1: TMenuItem;
+    procedure FormCreate(Sender: TObject);
+    procedure CadastrodeTanque1Click(Sender: TObject);
+    procedure CadastrodeBomba1Click(Sender: TObject);
+    procedure CadastrodeCombustvel1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FRM_Principal: TFRM_Principal;
+
+implementation
+
+{$R *.dfm}
+
+uses UNF_CadastroTanque, UNF_CadastroBomba, UNF_CadastroCombustivel,
+  UNF_Parametros;
+
+procedure TFRM_Principal.CadastrodeBomba1Click(Sender: TObject);
+begin
+   if FRM_CadastroBomba = nil then
+      FRM_CadastroBomba := TFRM_CadastroBomba.Create(application);
+
+   FRM_CadastroBomba.Show;
+end;
+
+procedure TFRM_Principal.CadastrodeCombustvel1Click(Sender: TObject);
+begin
+   if FRM_CadastroCombustivel = nil then
+      FRM_CadastroCombustivel := TFRM_CadastroCombustivel.Create(application);
+
+   TFRM_CadastroCombustivel.Show;
+end;
+
+procedure TFRM_Principal.CadastrodeTanque1Click(Sender: TObject);
+begin
+   if FRM_CadastroTanque = nil then
+      FRM_CadastroTanque := TFRM_CadastroTanque.Create(application);
+
+   FRM_CadastroTanque.Show;
+end;
+
+procedure TFRM_Principal.FormCreate(Sender: TObject);
+begin
+   Application.ProcessMessages;
+end;
+
+end.

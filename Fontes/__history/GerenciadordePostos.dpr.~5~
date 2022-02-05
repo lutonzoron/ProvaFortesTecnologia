@@ -1,0 +1,16 @@
+program GerenciadordePostos;
+
+uses
+  Vcl.Forms,
+  UNF_Principal in 'UNF_Principal.pas' {FRM_Principal},
+  UNF_CadastroTanque in 'UNF_CadastroTanque.pas' {FRM_CadastroTanque};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TFRM_Principal, FRM_Principal);
+  Application.CreateForm(TFRM_CadastroTanque, FRM_CadastroTanque);
+  Application.Run;
+end.

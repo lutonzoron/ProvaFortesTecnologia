@@ -1,0 +1,32 @@
+unit UNF_Parametros;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls;
+
+type
+  TFRM_Parametros = class(TForm)
+    PNL_Fundo: TPanel;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FRM_Parametros: TFRM_Parametros;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFRM_Parametros.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+   Action := caFree;
+   FRM_Parametros := nil;
+end;
+
+end.

@@ -1,0 +1,48 @@
+unit UNF_Parametros;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.DBCtrls, Vcl.Buttons;
+
+type
+  TFRM_Parametros = class(TForm)
+    PNL_Fundo: TPanel;
+    FDQ_Parametros: TFDQuery;
+    FDQ_ParametrosCODIGO_ID: TIntegerField;
+    FDQ_ParametrosDESCRICAO: TStringField;
+    FDQ_ParametrosID_TANQUE: TIntegerField;
+    FDQ_ParametrosDESCTANQUE: TStringField;
+    DTS_Parametros: TDataSource;
+    Label2: TLabel;
+    DBE_Valor: TDBEdit;
+    SPB_Gravar: TSpeedButton;
+    SPB_Cancelar: TSpeedButton;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FRM_Parametros: TFRM_Parametros;
+
+implementation
+
+{$R *.dfm}
+
+uses UNF_FDQueryHelper, UNF_Funcoes, UNF_MODULO;
+
+procedure TFRM_Parametros.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+   Action := caFree;
+   FRM_Parametros := nil;
+end;
+
+end.

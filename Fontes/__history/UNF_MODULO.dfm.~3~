@@ -1,0 +1,24 @@
+object DTM_Modulo: TDTM_Modulo
+  OldCreateOrder = False
+  OnCreate = DataModuleCreate
+  Height = 399
+  Width = 592
+  object FDConnection: TFDConnection
+    Params.Strings = (
+      'Database=C:\Users\willi\Desktop\Prova Fortes\BD\POSTO.FDB'
+      'User_Name=sysdba'
+      'Password=masterkey'
+      'Protocol=TCPIP'
+      'Server=localhost'
+      'DriverID=IB')
+    LoginPrompt = False
+    Transaction = FDTransaction
+    Left = 40
+    Top = 32
+  end
+  object FDTransaction: TFDTransaction
+    Connection = FDConnection
+    Left = 40
+    Top = 80
+  end
+end

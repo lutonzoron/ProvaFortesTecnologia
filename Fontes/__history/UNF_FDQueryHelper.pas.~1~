@@ -1,0 +1,12 @@
+unit UNF_FDQueryHelper;
+
+interface
+
+uses
+   FireDAC.Comp.Client;
+
+   type TFDQueryHelper = Class Helper for TFDQuery;
+
+implementation
+
+end.

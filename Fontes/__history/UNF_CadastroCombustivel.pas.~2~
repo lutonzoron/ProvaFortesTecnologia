@@ -1,0 +1,33 @@
+unit UNF_CadastroCombustivel;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls;
+
+type
+  TFRM_CadastroCombustivel = class(TForm)
+    PNL_Fundo: TPanel;
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FRM_CadastroCombustivel: TFRM_CadastroCombustivel;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFRM_CadastroCombustivel.FormClose(Sender: TObject;
+  var Action: TCloseAction);
+begin
+   Action := caFree;
+   FRM_CadastroCombustivel := nil;
+end;
+
+end.

@@ -1,0 +1,51 @@
+object DTM_Modulo: TDTM_Modulo
+  OldCreateOrder = False
+  OnCreate = DataModuleCreate
+  Height = 399
+  Width = 592
+  object FDConnection: TFDConnection
+    Params.Strings = (
+      'Database=C:\Users\willi\Desktop\Prova Fortes\BD\POSTO.FDB'
+      'User_Name=sysdba'
+      'Password=masterkey'
+      'Protocol=TCPIP'
+      'Server=localhost'
+      'DriverID=IB')
+    Connected = True
+    LoginPrompt = False
+    Transaction = FDTransaction
+    Left = 40
+    Top = 32
+  end
+  object FDTransaction: TFDTransaction
+    Connection = FDConnection
+    Left = 40
+    Top = 80
+  end
+  object FDQ_Tanque: TFDQuery
+    Connection = FDConnection
+    SQL.Strings = (
+      'select tanque.codigo_id,'
+      '       tanque.id_combustivel,'
+      '       tanque.quantidade_disponivel'
+      ''
+      'from tanque')
+    Left = 120
+    Top = 32
+    object FDQ_TanqueCODIGO_ID: TIntegerField
+      FieldName = 'CODIGO_ID'
+      Origin = 'CODIGO_ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object FDQ_TanqueID_COMBUSTIVEL: TIntegerField
+      FieldName = 'ID_COMBUSTIVEL'
+      Origin = 'ID_COMBUSTIVEL'
+      Required = True
+    end
+    object FDQ_TanqueQUANTIDADE_DISPONIVEL: TFloatField
+      FieldName = 'QUANTIDADE_DISPONIVEL'
+      Origin = 'QUANTIDADE_DISPONIVEL'
+    end
+  end
+end

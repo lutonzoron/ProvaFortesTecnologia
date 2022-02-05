@@ -1,0 +1,39 @@
+unit UNR_RelatorioAbast;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, RLReport, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+
+type
+  TFRM_RelatorioAbast = class(TForm)
+    RLR_Abastecimentos: TRLReport;
+    FDQ_Dados: TFDQuery;
+    DTS_Dados: TDataSource;
+    FDQ_DadosDATA_ABASTECIMENTO: TSQLTimeStampField;
+    FDQ_DadosVALOR_TOTAL: TFloatField;
+    FDQ_DadosQUANTIDADE_LITROS: TFloatField;
+    FDQ_DadosTOTAL_IMPOSTOS: TFloatField;
+    FDQ_DadosDESCBOMBA: TStringField;
+    FDQ_DadosDESCTANQUE: TStringField;
+    FDQ_DadosDESCCOMBUSTIVEL: TStringField;
+    RLBand1: TRLBand;
+    RLLabel1: TRLLabel;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FRM_RelatorioAbast: TFRM_RelatorioAbast;
+
+implementation
+
+{$R *.dfm}
+
+end.
