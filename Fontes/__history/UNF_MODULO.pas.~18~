@@ -15,12 +15,12 @@ type
   TDTM_Modulo = class(TDataModule)
     FDConnection: TFDConnection;
     FDTransaction: TFDTransaction;
-    FDQ_Tanque: TFDQuery;
-    FDQ_TanqueCODIGO_ID: TIntegerField;
-    FDQ_TanqueID_COMBUSTIVEL: TIntegerField;
-    FDQ_TanqueQUANTIDADE_DISPONIVEL: TFloatField;
     FDPhysFBDriverLink1: TFDPhysFBDriverLink;
     FDGUIxWaitCursor1: TFDGUIxWaitCursor;
+    FDQ_Parametros: TFDQuery;
+    DTS_Parametros: TDataSource;
+    FDQ_ParametrosCODIGO_ID: TIntegerField;
+    FDQ_ParametrosPERCENTUAL_IMPOSTOS: TFloatField;
     procedure DataModuleCreate(Sender: TObject);
   private
     { Private declarations }
@@ -35,38 +35,33 @@ implementation
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 
-uses UNF_Funcoes;
+uses UNF_Funcoes, UNF_FDQueryHelper;
 
 {$R *.dfm}
 
 procedure TDTM_Modulo.DataModuleCreate(Sender: TObject);
 var
    Config : TIniFile;
+   server, caminho : String;
 begin
    try
       FDConnection.Connected   := False;
 
       Config := TIniFile.Create(PegaDiretorio()+'config.ini');
 
+      caminho :=  Config.ReadString('CONFIG','CAMINHO','');
+
       if copy(caminho, length(caminho), 1) <> '\' then
          caminho  := caminho+'\';
 
-      server  :=  Config.ReadString('CONFIG','SERVER','');
-      caminho :=  Config.ReadString('CONFIG','CAMINHO','');
+      FDConnection.Params.Database := caminho + 'POSTO.FDB';
+      FDConnection.Connected := True;
 
-      IBDatabase.DatabaseName := server + ':' + caminho + 'FUNERARIA.FDB';
-      IBDatabase.Connected    := TRUE;
-
-      IBDatabase.Connected   := True;
-      IBTransaction.Active   := True;
+      FDQ_Parametros.Reopen;
    except
       MessageBox(Application.Handle, 'BANCO DE DADOS NÃO ENCONTRADO!'+#13+'VERIFIQUE O CAMINHO NO ARQUIVO CONFIG.INI', 'Sistema Gerenciador de Funerária', MB_OK + MB_ICONERROR );
       Application.Terminate;
    end;
-
-
-   FDConnection.Connected := True;
-   FDConnection
 end;
 
 end.

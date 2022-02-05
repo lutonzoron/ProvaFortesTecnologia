@@ -74,7 +74,7 @@ begin
    SPB_Cancelar.Enabled   := not SPB_Cancelar.Enabled;
    SPB_Sair.Enabled       := not SPB_Sair.Enabled;
 
-
+   TBS_Cadastro.Enabled  := not TBS_Cadastro.Enabled;
    TBS_Consulta.Enabled  := not TBS_Consulta.Enabled;
    DBG_Bomba.Enabled     := not DBG_Bomba.Enabled;
 end;
@@ -100,8 +100,8 @@ end;
 
 procedure TFRM_CadastroBomba.SPB_CancelarClick(Sender: TObject);
 begin
-   PGC_Bombas.ActivePage := TBS_Consulta;
    botoes;
+   PGC_Bombas.ActivePage := TBS_Consulta;
    FDQ_Bomba.Cancel;
 end;
 
@@ -113,8 +113,8 @@ begin
       exit;
    end;
 
-   PGC_Bombas.ActivePage := TBS_Cadastro;
    botoes;
+   PGC_Bombas.ActivePage := TBS_Cadastro;
    FDQ_Bomba.Edit;
    DBE_Descricao.SetFocus;
 end;
@@ -137,8 +137,8 @@ end;
 
 procedure TFRM_CadastroBomba.SPB_GravarClick(Sender: TObject);
 begin
-   PGC_Bombas.ActivePage := TBS_Consulta;
    botoes;
+   PGC_Bombas.ActivePage := TBS_Consulta;
 
    FDQ_Bomba.Post;
    FDQ_Bomba.Refresh;
@@ -146,8 +146,8 @@ end;
 
 procedure TFRM_CadastroBomba.SPB_NovoClick(Sender: TObject);
 begin
-   PGC_Bombas.ActivePage := TBS_Cadastro;
    botoes;
+   PGC_Bombas.ActivePage := TBS_Cadastro;
    FDQ_Bomba.Append;
    FDQ_BombaCODIGO_ID.AsInteger := 0;
    DBE_Descricao.SetFocus;

@@ -69,6 +69,7 @@
       end
       object TBS_Cadastro: TTabSheet
         Caption = 'Cadastro'
+        Enabled = False
         ImageIndex = 1
         object Panel1: TPanel
           Left = 0
@@ -78,7 +79,6 @@
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
-          ExplicitTop = -2
           object Label1: TLabel
             Left = 8
             Top = 8

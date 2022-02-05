@@ -50,6 +50,7 @@ type
     procedure SPB_GravarClick(Sender: TObject);
     procedure SPB_CancelarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure DBG_TanqueDblClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -79,6 +80,11 @@ begin
    DBG_Tanque.Enabled    := not DBG_Tanque.Enabled;
 end;
 
+procedure TFRM_CadastroTanque.DBG_TanqueDblClick(Sender: TObject);
+begin
+   SPB_Editar.Click;
+end;
+
 procedure TFRM_CadastroTanque.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
@@ -103,6 +109,12 @@ end;
 
 procedure TFRM_CadastroTanque.SPB_EditarClick(Sender: TObject);
 begin
+   if(FDQ_Tanque.IsEmpty)then
+   begin
+      MessageBox(Handle, 'Não há tanque para editar!', 'Sistema Gerenciador de Posto', MB_ICONEXCLAMATION + MB_OK);
+      exit;
+   end;
+
    PGC_Tanque.ActivePage := TBS_Cadastro;
    botoes;
    FDQ_Tanque.Edit;
@@ -131,7 +143,7 @@ begin
    botoes;
 
    FDQ_Tanque.Post;
-   FDQ_Tanque.RefreshRecord();
+   FDQ_Tanque.Refresh;
 end;
 
 procedure TFRM_CadastroTanque.SPB_NovoClick(Sender: TObject);

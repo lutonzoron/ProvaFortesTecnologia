@@ -75,8 +75,8 @@ begin
    SPB_Cancelar.Enabled   := not SPB_Cancelar.Enabled;
    SPB_Sair.Enabled       := not SPB_Sair.Enabled;
 
-
    TBS_Consulta.Enabled  := not TBS_Consulta.Enabled;
+   TBS_Cadastro.Enabled  := not TBS_Cadastro.Enabled;
    DBG_Tanque.Enabled    := not DBG_Tanque.Enabled;
 end;
 
@@ -102,8 +102,8 @@ end;
 
 procedure TFRM_CadastroTanque.SPB_CancelarClick(Sender: TObject);
 begin
-   PGC_Tanque.ActivePage := TBS_Consulta;
    botoes;
+   PGC_Tanque.ActivePage := TBS_Consulta;
    FDQ_Tanque.Cancel;
 end;
 
@@ -115,8 +115,8 @@ begin
       exit;
    end;
 
-   PGC_Tanque.ActivePage := TBS_Cadastro;
    botoes;
+   PGC_Tanque.ActivePage := TBS_Cadastro;
    FDQ_Tanque.Edit;
    DBE_Descricao.SetFocus;
 end;
@@ -139,8 +139,8 @@ end;
 
 procedure TFRM_CadastroTanque.SPB_GravarClick(Sender: TObject);
 begin
-   PGC_Tanque.ActivePage := TBS_Consulta;
    botoes;
+   PGC_Tanque.ActivePage := TBS_Consulta;
 
    FDQ_Tanque.Post;
    FDQ_Tanque.Refresh;
@@ -148,8 +148,8 @@ end;
 
 procedure TFRM_CadastroTanque.SPB_NovoClick(Sender: TObject);
 begin
-   PGC_Tanque.ActivePage := TBS_Cadastro;
    botoes;
+   PGC_Tanque.ActivePage := TBS_Cadastro;
    FDQ_Tanque.Append;
    FDQ_TanqueCODIGO_ID.AsInteger := 0;
    DBE_Descricao.SetFocus;

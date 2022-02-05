@@ -43,7 +43,6 @@ type
     FDQ_BombaID_COMBUTIVEL: TSmallintField;
     FDQ_BombaDESCCOMBUSTIVEL: TStringField;
     FDQ_BombaVALORCOMBUSTIVEL: TFloatField;
-    SPB_Gravar: TSpeedButton;
     SPB_Cancelar: TSpeedButton;
     Label1: TLabel;
     DBLC_Bomba: TDBLookupComboBox;
@@ -59,15 +58,16 @@ type
     Label6: TLabel;
     DBE_TotalImpostos: TDBEdit;
     Label7: TLabel;
+    BTN_Lancar: TButton;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure SPB_SairClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure SPB_CancelarClick(Sender: TObject);
     procedure FDQ_AbastecimentoBeforePost(DataSet: TDataSet);
-    procedure SPB_GravarClick(Sender: TObject);
     procedure FDQ_AbastecimentoQUANTIDADE_LITROSChange(Sender: TField);
     procedure DBLC_BombaKeyPress(Sender: TObject; var Key: Char);
     procedure DBE_QuantidadeKeyPress(Sender: TObject; var Key: Char);
+    procedure BTN_LancarClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -83,11 +83,36 @@ implementation
 
 uses UNF_FDQueryHelper, UNF_MODULO;
 
+procedure TFRM_LancAbastecimento.BTN_LancarClick(Sender: TObject);
+begin
+   BTN_Lancar.SetFocus;
+
+   if(FDQ_AbastecimentoID_BOMBA.IsNull)then
+   begin
+      MessageBox(Handle, 'Necessário selecionar uma bomba!', 'Sistema Gerenciador de Posto', MB_ICONEXCLAMATION + MB_OK);
+      DBLC_Bomba.SetFocus;
+      exit;
+   end;
+
+   if(FDQ_AbastecimentoQUANTIDADE_LITROS.IsNull)then
+   begin
+      MessageBox(Handle, 'Necessário inserir uma quantidade!', 'Sistema Gerenciador de Posto', MB_ICONEXCLAMATION + MB_OK);
+      DBE_Quantidade.SetFocus;
+      exit;
+   end;
+
+   FDQ_Abastecimento.Post;
+   FDQ_Abastecimento.Refresh;
+   FDQ_Abastecimento.Append;
+   FDQ_AbastecimentoID_BOMBA.AsInteger := FDQ_BombaCODIGO_ID.AsInteger;
+   DBLC_Bomba.SetFocus;
+end;
+
 procedure TFRM_LancAbastecimento.DBE_QuantidadeKeyPress(Sender: TObject;
   var Key: Char);
 begin
    if(key = #13)then
-      DBLC_Bomba.SetFocus;
+      BTN_Lancar.SetFocus;
 end;
 
 procedure TFRM_LancAbastecimento.DBLC_BombaKeyPress(Sender: TObject;
@@ -106,13 +131,13 @@ end;
 procedure TFRM_LancAbastecimento.FDQ_AbastecimentoQUANTIDADE_LITROSChange(
   Sender: TField);
 begin
-   if(not FDQ_AbastecimentoQUANTIDADE_LITROS.IsNull)then
-   begin
-      FDQ_AbastecimentoVALOR_TOTAL.AsFloat    := FDQ_BombaVALORCOMBUSTIVEL.AsFloat *
-                                                 FDQ_AbastecimentoQUANTIDADE_LITROS.AsFloat;
-      FDQ_AbastecimentoTOTAL_IMPOSTOS.AsFloat := StrToFloat(FormatFloat('0.00',(FDQ_AbastecimentoVALOR_TOTAL.AsFloat *
+   if(FDQ_AbastecimentoQUANTIDADE_LITROS.IsNull)then
+      FDQ_AbastecimentoQUANTIDADE_LITROS.AsFloat := 0;
+
+   FDQ_AbastecimentoVALOR_TOTAL.AsFloat    := FDQ_BombaVALORCOMBUSTIVEL.AsFloat *
+                                              FDQ_AbastecimentoQUANTIDADE_LITROS.AsFloat;
+   FDQ_AbastecimentoTOTAL_IMPOSTOS.AsFloat := StrToFloat(FormatFloat('0.00',(FDQ_AbastecimentoVALOR_TOTAL.AsFloat *
                                                                                (DTM_Modulo.FDQ_ParametrosPERCENTUAL_IMPOSTOS.AsFloat / 100))));
-   end;
 end;
 
 procedure TFRM_LancAbastecimento.FormClose(Sender: TObject; var Action: TCloseAction);
@@ -136,14 +161,6 @@ begin
    FDQ_Abastecimento.Cancel;
    FDQ_Abastecimento.Refresh;
    FDQ_Abastecimento.Append;
-end;
-
-procedure TFRM_LancAbastecimento.SPB_GravarClick(Sender: TObject);
-begin
-   FDQ_Abastecimento.Post;
-   FDQ_Abastecimento.Refresh;
-   FDQ_Abastecimento.Append;
-   DBLC_Bomba.SetFocus;
 end;
 
 procedure TFRM_LancAbastecimento.SPB_SairClick(Sender: TObject);

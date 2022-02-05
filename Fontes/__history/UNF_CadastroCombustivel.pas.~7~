@@ -130,11 +130,9 @@ end;
 
 procedure TFRM_CadastroCombustivel.SPB_GravarClick(Sender: TObject);
 begin
-   DBE_Descricao.SetFocus;
-
    if(FDQ_CombustivelVALOR.IsNull)then
    begin
-      MessageBox(Handle, 'Necessário inserir um valor para o combustível!', 'Sistema Gerenciador de Posto', MB_ICONEXCLAMATION + MB_OK);
+      MessageBox(Handle, 'Necessário inserir um valor!', 'Sistema Gerenciador de Posto', MB_ICONEXCLAMATION + MB_OK);
       DBE_Valor.SetFocus;
       exit;
    end;

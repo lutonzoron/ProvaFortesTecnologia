@@ -25,8 +25,6 @@ object FRM_LancAbastecimento: TFRM_LancAbastecimento
     Height = 186
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 619
-    ExplicitHeight = 424
     DesignSize = (
       572
       186)
@@ -121,8 +119,6 @@ object FRM_LancAbastecimento: TFRM_LancAbastecimento
       Align = alTop
       Caption = 'Lan'#231'amento de Abastecimentos'
       TabOrder = 0
-      ExplicitLeft = 2
-      ExplicitTop = 0
       object Label1: TLabel
         Left = 9
         Top = 17
@@ -155,9 +151,9 @@ object FRM_LancAbastecimento: TFRM_LancAbastecimento
       object Label5: TLabel
         Left = 9
         Top = 65
-        Width = 60
+        Width = 106
         Height = 13
-        Caption = 'Quantidade:'
+        Caption = 'Quantidade em Litros:'
       end
       object Label6: TLabel
         Left = 190

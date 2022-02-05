@@ -59,7 +59,7 @@ begin
 
       FDQ_Parametros.Reopen;
    except
-      MessageBox(Application.Handle, 'BANCO DE DADOS NÃO ENCONTRADO!'+#13+'VERIFIQUE O CAMINHO NO ARQUIVO CONFIG.INI', 'Sistema Gerenciador de Funerária', MB_OK + MB_ICONERROR );
+      MessageBox(Application.Handle, 'BANCO DE DADOS NÃO ENCONTRADO!'+#13+'VERIFIQUE O CAMINHO NO ARQUIVO CONFIG.INI', 'Sistema de Postos', MB_OK + MB_ICONERROR );
       Application.Terminate;
    end;
 end;

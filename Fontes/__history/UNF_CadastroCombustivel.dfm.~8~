@@ -79,6 +79,7 @@ object FRM_CadastroCombustivel: TFRM_CadastroCombustivel
           Align = alClient
           BevelOuter = bvNone
           TabOrder = 0
+          ExplicitTop = -1
           object Label1: TLabel
             Left = 8
             Top = 8
@@ -249,7 +250,7 @@ object FRM_CadastroCombustivel: TFRM_CadastroCombustivel
     end
     object SPB_Gravar: TSpeedButton
       Left = 277
-      Top = 5
+      Top = 6
       Width = 85
       Height = 27
       Caption = 'Gravar'

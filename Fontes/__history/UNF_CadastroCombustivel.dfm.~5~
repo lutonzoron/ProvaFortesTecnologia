@@ -25,6 +25,8 @@ object FRM_CadastroCombustivel: TFRM_CadastroCombustivel
     Height = 530
     Align = alClient
     TabOrder = 0
+    ExplicitWidth = 635
+    ExplicitHeight = 299
     object PGC_Bombas: TPageControl
       Left = 1
       Top = 1
@@ -33,6 +35,8 @@ object FRM_CadastroCombustivel: TFRM_CadastroCombustivel
       ActivePage = TBS_Cadastro
       Align = alClient
       TabOrder = 0
+      ExplicitWidth = 742
+      ExplicitHeight = 439
       object TBS_Consulta: TTabSheet
         Caption = 'Consulta'
         object DBG_Bomba: TDBGrid
@@ -69,7 +73,6 @@ object FRM_CadastroCombustivel: TFRM_CadastroCombustivel
       end
       object TBS_Cadastro: TTabSheet
         Caption = 'Cadastro'
-        Enabled = False
         ImageIndex = 1
         object Panel1: TPanel
           Left = 0
@@ -122,6 +125,9 @@ object FRM_CadastroCombustivel: TFRM_CadastroCombustivel
     Height = 44
     Align = alBottom
     TabOrder = 1
+    ExplicitLeft = 1
+    ExplicitTop = 440
+    ExplicitWidth = 742
     DesignSize = (
       790
       44)
@@ -249,7 +255,7 @@ object FRM_CadastroCombustivel: TFRM_CadastroCombustivel
     end
     object SPB_Gravar: TSpeedButton
       Left = 277
-      Top = 5
+      Top = 6
       Width = 85
       Height = 27
       Caption = 'Gravar'

@@ -50,6 +50,7 @@ type
     procedure SPB_GravarClick(Sender: TObject);
     procedure SPB_CancelarClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure DBG_TanqueDblClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -76,7 +77,13 @@ begin
 
 
    TBS_Consulta.Enabled  := not TBS_Consulta.Enabled;
+   TBS_Cadastro.Enabled  := not TBS_Cadastro.Enabled;
    DBG_Tanque.Enabled    := not DBG_Tanque.Enabled;
+end;
+
+procedure TFRM_CadastroTanque.DBG_TanqueDblClick(Sender: TObject);
+begin
+   SPB_Editar.Click;
 end;
 
 procedure TFRM_CadastroTanque.FormClose(Sender: TObject;
@@ -103,9 +110,16 @@ end;
 
 procedure TFRM_CadastroTanque.SPB_EditarClick(Sender: TObject);
 begin
+   if(FDQ_Tanque.IsEmpty)then
+   begin
+      MessageBox(Handle, 'Não há tanque para editar!', 'Sistema Gerenciador de Posto', MB_ICONEXCLAMATION + MB_OK);
+      exit;
+   end;
+
    PGC_Tanque.ActivePage := TBS_Cadastro;
    botoes;
    FDQ_Tanque.Edit;
+   DBE_Descricao.SetFocus;
 end;
 
 procedure TFRM_CadastroTanque.SPB_ExcluirClick(Sender: TObject);
@@ -122,7 +136,6 @@ begin
    end;
 
    FDQ_Tanque.Delete;
-   FDQ_Tanque.Transaction.CommitRetaining;
 end;
 
 procedure TFRM_CadastroTanque.SPB_GravarClick(Sender: TObject);
@@ -131,7 +144,7 @@ begin
    botoes;
 
    FDQ_Tanque.Post;
-   FDQ_Tanque.Transaction.CommitRetaining;
+   FDQ_Tanque.Refresh;
 end;
 
 procedure TFRM_CadastroTanque.SPB_NovoClick(Sender: TObject);
@@ -140,6 +153,7 @@ begin
    botoes;
    FDQ_Tanque.Append;
    FDQ_TanqueCODIGO_ID.AsInteger := 0;
+   DBE_Descricao.SetFocus;
 end;
 
 procedure TFRM_CadastroTanque.SPB_SairClick(Sender: TObject);

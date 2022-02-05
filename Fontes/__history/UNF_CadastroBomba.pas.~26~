@@ -1,23 +1,25 @@
-unit UNF_CadastroCombustivel;
+unit UNF_CadastroBomba;
 
 interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, FireDAC.Stan.Intf,
-  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
-  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
-  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Buttons, Vcl.StdCtrls,
-  Vcl.Mask, Vcl.DBCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Data.DB, Vcl.DBCtrls,
+  Vcl.StdCtrls, Vcl.Mask, Vcl.Grids, Vcl.DBGrids, Vcl.ComCtrls, Vcl.Buttons,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
+  FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
-  TFRM_CadastroCombustivel = class(TForm)
+  TFRM_CadastroBomba = class(TForm)
     PNL_Fundo: TPanel;
-    FDQ_Combustivel: TFDQuery;
-    FDQ_CombustivelCODIGO_ID: TIntegerField;
-    FDQ_CombustivelDESCRICAO: TStringField;
-    FDQ_CombustivelVALOR: TFloatField;
-    DTS_Combustivel: TDataSource;
+    PGC_Bombas: TPageControl;
+    TBS_Consulta: TTabSheet;
+    DBG_Bomba: TDBGrid;
+    TBS_Cadastro: TTabSheet;
+    Panel1: TPanel;
+    Label1: TLabel;
+    DBE_Descricao: TDBEdit;
     PNL_Botoes: TPanel;
     SPB_Novo: TSpeedButton;
     SPB_Editar: TSpeedButton;
@@ -25,15 +27,19 @@ type
     SPB_Gravar: TSpeedButton;
     SPB_Cancelar: TSpeedButton;
     SPB_Sair: TSpeedButton;
-    PGC_Bombas: TPageControl;
-    TBS_Consulta: TTabSheet;
-    DBG_Bomba: TDBGrid;
-    TBS_Cadastro: TTabSheet;
-    Panel1: TPanel;
-    Label1: TLabel;
+    FDQ_Bomba: TFDQuery;
+    DTS_Bomba: TDataSource;
     Label2: TLabel;
-    DBE_Descricao: TDBEdit;
-    DBE_Valor: TDBEdit;
+    FDQ_BombaCODIGO_ID: TIntegerField;
+    FDQ_BombaDESCRICAO: TStringField;
+    FDQ_BombaID_TANQUE: TIntegerField;
+    FDQ_Tanque: TFDQuery;
+    FDQ_TanqueCODIGO_ID: TIntegerField;
+    FDQ_TanqueDESCRICAO: TStringField;
+    FDQ_TanqueID_COMBUSTIVEL: TIntegerField;
+    DTS_Tanque: TDataSource;
+    FDQ_BombaDESCTANQUE: TStringField;
+    DBL_Tanque: TDBLookupComboBox;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure SPB_SairClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -51,7 +57,7 @@ type
   end;
 
 var
-  FRM_CadastroCombustivel: TFRM_CadastroCombustivel;
+  FRM_CadastroBomba: TFRM_CadastroBomba;
 
 implementation
 
@@ -59,7 +65,7 @@ implementation
 
 uses UNF_FDQueryHelper, UNF_Funcoes, UNF_MODULO;
 
-procedure TFRM_CadastroCombustivel.botoes;
+procedure TFRM_CadastroBomba.botoes;
 begin
    SPB_Novo.Enabled       := not SPB_Novo.Enabled;
    SPB_Editar.Enabled     := not SPB_Editar.Enabled;
@@ -68,53 +74,54 @@ begin
    SPB_Cancelar.Enabled   := not SPB_Cancelar.Enabled;
    SPB_Sair.Enabled       := not SPB_Sair.Enabled;
 
-   TBS_Cadastro.Enabled  := not TBS_Cadastro.Enabled;
+
    TBS_Consulta.Enabled  := not TBS_Consulta.Enabled;
    DBG_Bomba.Enabled     := not DBG_Bomba.Enabled;
 end;
 
-procedure TFRM_CadastroCombustivel.DBG_BombaDblClick(Sender: TObject);
+procedure TFRM_CadastroBomba.DBG_BombaDblClick(Sender: TObject);
 begin
    SPB_Editar.Click;
 end;
 
-procedure TFRM_CadastroCombustivel.FormClose(Sender: TObject;
+procedure TFRM_CadastroBomba.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
    Action := caFree;
-   FRM_CadastroCombustivel := nil;
+   FRM_CadastroBomba := nil;
 end;
 
-procedure TFRM_CadastroCombustivel.FormCreate(Sender: TObject);
+procedure TFRM_CadastroBomba.FormCreate(Sender: TObject);
 begin
    PGC_Bombas.ActivePage := TBS_Consulta;
-   FDQ_COMBUSTIVEL.Reopen;
+   FDQ_Bomba.Reopen;
+   FDQ_Tanque.Reopen;
 end;
 
-procedure TFRM_CadastroCombustivel.SPB_CancelarClick(Sender: TObject);
+procedure TFRM_CadastroBomba.SPB_CancelarClick(Sender: TObject);
 begin
+   PGC_Bombas.ActivePage := TBS_Consulta;
    botoes;
-   PGC_Bombas.ActivePage := TBS_Consulta;
-   FDQ_Combustivel.Cancel;
+   FDQ_Bomba.Cancel;
 end;
 
-procedure TFRM_CadastroCombustivel.SPB_EditarClick(Sender: TObject);
+procedure TFRM_CadastroBomba.SPB_EditarClick(Sender: TObject);
 begin
-   if(FDQ_Combustivel.IsEmpty)then
+   if(FDQ_Bomba.IsEmpty)then
    begin
       MessageBox(Handle, 'Não há combustível para editar!', 'Sistema Gerenciador de Posto', MB_ICONEXCLAMATION + MB_OK);
       exit;
    end;
 
-   botoes;
    PGC_Bombas.ActivePage := TBS_Cadastro;
-   FDQ_Combustivel.Edit;
+   botoes;
+   FDQ_Bomba.Edit;
    DBE_Descricao.SetFocus;
 end;
 
-procedure TFRM_CadastroCombustivel.SPB_ExcluirClick(Sender: TObject);
+procedure TFRM_CadastroBomba.SPB_ExcluirClick(Sender: TObject);
 begin
-   if(FDQ_Combustivel.IsEmpty)then
+   if(FDQ_Bomba.IsEmpty)then
    begin
       MessageBox(Handle, 'Não há combustível para excluir!', 'Sistema Gerenciador de Posto', MB_ICONEXCLAMATION + MB_OK);
       exit;
@@ -125,37 +132,28 @@ begin
       exit;
    end;
 
-   FDQ_Combustivel.Delete;
+   FDQ_Bomba.Delete;
 end;
 
-procedure TFRM_CadastroCombustivel.SPB_GravarClick(Sender: TObject);
+procedure TFRM_CadastroBomba.SPB_GravarClick(Sender: TObject);
 begin
-   DBE_Descricao.SetFocus;
-
-   if(FDQ_CombustivelVALOR.IsNull)then
-   begin
-      MessageBox(Handle, 'Necessário inserir um valor para o combustível!', 'Sistema Gerenciador de Posto', MB_ICONEXCLAMATION + MB_OK);
-      DBE_Valor.SetFocus;
-      exit;
-   end;
-
-   botoes;
    PGC_Bombas.ActivePage := TBS_Consulta;
+   botoes;
 
-   FDQ_Combustivel.Post;
-   FDQ_Combustivel.Refresh;
+   FDQ_Bomba.Post;
+   FDQ_Bomba.Refresh;
 end;
 
-procedure TFRM_CadastroCombustivel.SPB_NovoClick(Sender: TObject);
+procedure TFRM_CadastroBomba.SPB_NovoClick(Sender: TObject);
 begin
-   botoes;
    PGC_Bombas.ActivePage := TBS_Cadastro;
-   FDQ_Combustivel.Append;
-   FDQ_CombustivelCODIGO_ID.AsInteger := 0;
+   botoes;
+   FDQ_Bomba.Append;
+   FDQ_BombaCODIGO_ID.AsInteger := 0;
    DBE_Descricao.SetFocus;
 end;
 
-procedure TFRM_CadastroCombustivel.SPB_SairClick(Sender: TObject);
+procedure TFRM_CadastroBomba.SPB_SairClick(Sender: TObject);
 begin
    close;
 end;

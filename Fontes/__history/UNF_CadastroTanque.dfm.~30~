@@ -1,4 +1,4 @@
-object FRM_CadastroTanque: TFRM_CadastroTanque
+﻿object FRM_CadastroTanque: TFRM_CadastroTanque
   Left = 0
   Top = 0
   Caption = 'Cadastro de Tanque'
@@ -30,7 +30,7 @@ object FRM_CadastroTanque: TFRM_CadastroTanque
       Top = 1
       Width = 742
       Height = 439
-      ActivePage = TBS_Consulta
+      ActivePage = TBS_Cadastro
       Align = alClient
       TabOrder = 0
       object TBS_Consulta: TTabSheet
@@ -49,6 +49,7 @@ object FRM_CadastroTanque: TFRM_CadastroTanque
           TitleFont.Height = -11
           TitleFont.Name = 'Tahoma'
           TitleFont.Style = []
+          OnDblClick = DBG_TanqueDblClick
           Columns = <
             item
               Expanded = False
@@ -63,12 +64,6 @@ object FRM_CadastroTanque: TFRM_CadastroTanque
               Title.Caption = 'Combust'#237'vel'
               Width = 206
               Visible = True
-            end
-            item
-              Expanded = False
-              FieldName = 'QUANTIDADE_DISPONIVEL'
-              Title.Caption = 'Quantidade Dispon'#237'vel'
-              Visible = True
             end>
         end
       end
@@ -82,12 +77,43 @@ object FRM_CadastroTanque: TFRM_CadastroTanque
           Height = 411
           Align = alClient
           BevelOuter = bvNone
-          Caption = 'Panel1'
           TabOrder = 0
-          ExplicitLeft = 136
-          ExplicitTop = 144
-          ExplicitWidth = 185
-          ExplicitHeight = 41
+          ExplicitTop = -2
+          object Label1: TLabel
+            Left = 8
+            Top = 8
+            Width = 50
+            Height = 13
+            Caption = 'Descri'#231#227'o:'
+          end
+          object Label2: TLabel
+            Left = 8
+            Top = 69
+            Width = 62
+            Height = 13
+            Caption = 'Combust'#237'vel:'
+          end
+          object DBE_Descricao: TDBEdit
+            Left = 8
+            Top = 27
+            Width = 313
+            Height = 21
+            DataField = 'DESCRICAO'
+            DataSource = DTS_Tanque
+            TabOrder = 0
+          end
+          object DBL_Combustível: TDBLookupComboBox
+            Left = 8
+            Top = 88
+            Width = 313
+            Height = 21
+            DataField = 'ID_COMBUSTIVEL'
+            DataSource = DTS_Tanque
+            KeyField = 'CODIGO_ID'
+            ListField = 'DESCRICAO'
+            ListSource = DTS_Combustivel
+            TabOrder = 1
+          end
         end
       end
     end
@@ -260,7 +286,7 @@ object FRM_CadastroTanque: TFRM_CadastroTanque
         OnClick = SPB_GravarClick
       end
       object SPB_Cancelar: TSpeedButton
-        Left = 365
+        Left = 368
         Top = 6
         Width = 85
         Height = 27
@@ -312,7 +338,7 @@ object FRM_CadastroTanque: TFRM_CadastroTanque
         OnClick = SPB_CancelarClick
       end
       object SPB_Sair: TSpeedButton
-        Left = 653
+        Left = 629
         Top = 6
         Width = 85
         Height = 27
@@ -347,11 +373,12 @@ object FRM_CadastroTanque: TFRM_CadastroTanque
   end
   object FDQ_Tanque: TFDQuery
     Connection = DTM_Modulo.FDConnection
+    UpdateOptions.AssignedValues = [uvAutoCommitUpdates]
+    UpdateOptions.AutoCommitUpdates = True
     SQL.Strings = (
       'select tanque.codigo_id,'
       '       tanque.descricao,'
-      '       tanque.id_combustivel,'
-      '       tanque.quantidade_disponivel'
+      '       tanque.id_combustivel'
       ''
       'from tanque')
     Left = 373
@@ -372,10 +399,6 @@ object FRM_CadastroTanque: TFRM_CadastroTanque
       Origin = 'ID_COMBUSTIVEL'
       Required = True
     end
-    object FDQ_TanqueQUANTIDADE_DISPONIVEL: TFloatField
-      FieldName = 'QUANTIDADE_DISPONIVEL'
-      Origin = 'QUANTIDADE_DISPONIVEL'
-    end
     object FDQ_TanqueDESCCOMBUSTIVEL: TStringField
       FieldKind = fkLookup
       FieldName = 'DESCCOMBUSTIVEL'
@@ -390,7 +413,7 @@ object FRM_CadastroTanque: TFRM_CadastroTanque
   object DTS_Tanque: TDataSource
     DataSet = FDQ_Tanque
     Left = 373
-    Top = 209
+    Top = 233
   end
   object FDQ_COMBUSTIVEL: TFDQuery
     Connection = DTM_Modulo.FDConnection
@@ -417,5 +440,10 @@ object FRM_CadastroTanque: TFRM_CadastroTanque
       FieldName = 'VALOR'
       Origin = 'VALOR'
     end
+  end
+  object DTS_Combustivel: TDataSource
+    DataSet = FDQ_COMBUSTIVEL
+    Left = 485
+    Top = 233
   end
 end

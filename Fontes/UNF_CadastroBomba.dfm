@@ -25,8 +25,6 @@ object FRM_CadastroBomba: TFRM_CadastroBomba
     Height = 515
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 635
-    ExplicitHeight = 299
     object PGC_Bombas: TPageControl
       Left = 1
       Top = 1
@@ -35,8 +33,6 @@ object FRM_CadastroBomba: TFRM_CadastroBomba
       ActivePage = TBS_Cadastro
       Align = alClient
       TabOrder = 0
-      ExplicitWidth = 742
-      ExplicitHeight = 439
       object TBS_Consulta: TTabSheet
         Caption = 'Consulta'
         object DBG_Bomba: TDBGrid
@@ -73,6 +69,7 @@ object FRM_CadastroBomba: TFRM_CadastroBomba
       end
       object TBS_Cadastro: TTabSheet
         Caption = 'Cadastro'
+        Enabled = False
         ImageIndex = 1
         object Panel1: TPanel
           Left = 0
@@ -128,8 +125,6 @@ object FRM_CadastroBomba: TFRM_CadastroBomba
       Height = 44
       Align = alBottom
       TabOrder = 1
-      ExplicitTop = 440
-      ExplicitWidth = 742
       DesignSize = (
         777
         44)

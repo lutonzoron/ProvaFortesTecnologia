@@ -2,7 +2,7 @@ object FRM_LancAbastecimento: TFRM_LancAbastecimento
   Left = 0
   Top = 0
   Caption = 'Lan'#231'amento de Abastecimentos'
-  ClientHeight = 377
+  ClientHeight = 186
   ClientWidth = 572
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -22,17 +22,17 @@ object FRM_LancAbastecimento: TFRM_LancAbastecimento
     Left = 0
     Top = 0
     Width = 572
-    Height = 377
+    Height = 186
     Align = alClient
     TabOrder = 0
     ExplicitWidth = 619
     ExplicitHeight = 424
     DesignSize = (
       572
-      377)
+      186)
     object SPB_Sair: TSpeedButton
-      Left = 477
-      Top = 112
+      Left = 476
+      Top = 136
       Width = 85
       Height = 27
       Anchors = [akTop, akRight]
@@ -61,45 +61,10 @@ object FRM_LancAbastecimento: TFRM_LancAbastecimento
         2D3104474D4B4D3E450202024545322E333004464A494A3E450202020202453B
         3644044545454545450202020202020245450402020202020202}
       OnClick = SPB_SairClick
-      ExplicitLeft = 768
-    end
-    object SPB_Gravar: TSpeedButton
-      Left = 10
-      Top = 112
-      Width = 85
-      Height = 27
-      Caption = '&Lan'#231'ar'
-      Glyph.Data = {
-        36030000424D3603000000000000360000002800000010000000100000000100
-        18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
-        FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
-        FFFF00FFFF00FFFF00FFFF00FFFF00FF97433F97433FB59A9BB59A9BB59A9BB5
-        9A9BB59A9BB59A9BB59A9B93303097433FFF00FFFF00FFFF00FFFF00FF97433F
-        D66868C66060E5DEDF92292A92292AE4E7E7E0E3E6D9DFE0CCC9CC8F201FAF46
-        4697433FFF00FFFF00FFFF00FF97433FD06566C25F5FE9E2E292292A92292AE2
-        E1E3E2E6E8DDE2E4CFCCCF8F2222AD464697433FFF00FFFF00FFFF00FF97433F
-        D06565C15D5DECE4E492292A92292ADFDDDFE1E6E8E0E5E7D3D0D28A1E1EAB44
-        4497433FFF00FFFF00FFFF00FF97433FD06565C15B5CEFE6E6EDE5E5E5DEDFE0
-        DDDFDFE0E2E0E1E3D6D0D2962A2AB24A4A97433FFF00FFFF00FFFF00FF97433F
-        CD6263C86060C96767CC7272CA7271C66969C46464CC6D6CCA6667C55D5DCD65
-        6597433FFF00FFFF00FFFF00FF97433FB65553C27B78D39D9CD7A7A5D8A7A6D8
-        A6A5D7A09FD5A09FD7A9A7D8ABABCC666797433FFF00FFFF00FFFF00FF97433F
-        CC6667F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9CC66
-        6797433FFF00FFFF00FFFF00FF97433FCC6667F9F9F9F9F9F9F9F9F9F9F9F9F9
-        F9F9F9F9F9F9F9F9F9F9F9F9F9F9CC666797433FFF00FFFF00FFFF00FF97433F
-        CC6667F9F9F9CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDF9F9F9CC66
-        6797433FFF00FFFF00FFFF00FF97433FCC6667F9F9F9F9F9F9F9F9F9F9F9F9F9
-        F9F9F9F9F9F9F9F9F9F9F9F9F9F9CC666797433FFF00FFFF00FFFF00FF97433F
-        CC6667F9F9F9CDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDCDF9F9F9CC66
-        6797433FFF00FFFF00FFFF00FF97433FCC6667F9F9F9F9F9F9F9F9F9F9F9F9F9
-        F9F9F9F9F9F9F9F9F9F9F9F9F9F9CC666797433FFF00FFFF00FFFF00FFFF00FF
-        97433FF9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F99743
-        3FFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
-        00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
     end
     object SPB_Cancelar: TSpeedButton
       Left = 101
-      Top = 112
+      Top = 136
       Width = 85
       Height = 27
       Caption = 'Lim&par'
@@ -152,12 +117,12 @@ object FRM_LancAbastecimento: TFRM_LancAbastecimento
       Left = 1
       Top = 1
       Width = 570
-      Height = 105
+      Height = 120
       Align = alTop
       Caption = 'Lan'#231'amento de Abastecimentos'
       TabOrder = 0
       ExplicitLeft = 2
-      ExplicitWidth = 617
+      ExplicitTop = 0
       object Label1: TLabel
         Left = 9
         Top = 17
@@ -187,6 +152,27 @@ object FRM_LancAbastecimento: TFRM_LancAbastecimento
         Alignment = taRightJustify
         Caption = 'Valor:'
       end
+      object Label5: TLabel
+        Left = 9
+        Top = 65
+        Width = 60
+        Height = 13
+        Caption = 'Quantidade:'
+      end
+      object Label6: TLabel
+        Left = 190
+        Top = 65
+        Width = 55
+        Height = 13
+        Caption = 'Valor Total:'
+      end
+      object Label7: TLabel
+        Left = 318
+        Top = 65
+        Width = 75
+        Height = 13
+        Caption = 'Total Impostos:'
+      end
       object DBLC_Bomba: TDBLookupComboBox
         Left = 9
         Top = 36
@@ -198,6 +184,7 @@ object FRM_LancAbastecimento: TFRM_LancAbastecimento
         ListField = 'DESCRICAO'
         ListSource = DTS_Bomba
         TabOrder = 0
+        OnKeyPress = DBLC_BombaKeyPress
       end
       object DBE_Tanque: TDBEdit
         Left = 191
@@ -231,6 +218,47 @@ object FRM_LancAbastecimento: TFRM_LancAbastecimento
         ParentBiDiMode = False
         TabOrder = 3
       end
+      object DBE_Quantidade: TDBEdit
+        Left = 9
+        Top = 84
+        Width = 175
+        Height = 21
+        BiDiMode = bdRightToLeft
+        DataField = 'QUANTIDADE_LITROS'
+        DataSource = DTS_Abastecimento
+        ParentBiDiMode = False
+        TabOrder = 4
+        OnKeyPress = DBE_QuantidadeKeyPress
+      end
+      object DBE_ValorTotal: TDBEdit
+        Left = 190
+        Top = 84
+        Width = 121
+        Height = 21
+        DataField = 'VALOR_TOTAL'
+        DataSource = DTS_Abastecimento
+        Enabled = False
+        TabOrder = 5
+      end
+      object DBE_TotalImpostos: TDBEdit
+        Left = 317
+        Top = 84
+        Width = 121
+        Height = 21
+        DataField = 'TOTAL_IMPOSTOS'
+        DataSource = DTS_Abastecimento
+        Enabled = False
+        TabOrder = 6
+      end
+    end
+    object BTN_Lancar: TButton
+      Left = 10
+      Top = 136
+      Width = 85
+      Height = 27
+      Caption = 'Lan'#231'ar '
+      TabOrder = 1
+      OnClick = BTN_LancarClick
     end
   end
   object FDQ_Abastecimento: TFDQuery
@@ -260,14 +288,18 @@ object FRM_LancAbastecimento: TFRM_LancAbastecimento
     object FDQ_AbastecimentoQUANTIDADE_LITROS: TFloatField
       FieldName = 'QUANTIDADE_LITROS'
       Origin = 'QUANTIDADE_LITROS'
+      OnChange = FDQ_AbastecimentoQUANTIDADE_LITROSChange
+      DisplayFormat = '##0.000'
     end
     object FDQ_AbastecimentoVALOR_TOTAL: TFloatField
       FieldName = 'VALOR_TOTAL'
       Origin = 'VALOR_TOTAL'
+      DisplayFormat = '##0.000'
     end
     object FDQ_AbastecimentoTOTAL_IMPOSTOS: TFloatField
       FieldName = 'TOTAL_IMPOSTOS'
       Origin = 'TOTAL_IMPOSTOS'
+      DisplayFormat = '##0.000'
     end
     object FDQ_AbastecimentoDATA_ABASTECIMENTO: TDateField
       FieldName = 'DATA_ABASTECIMENTO'

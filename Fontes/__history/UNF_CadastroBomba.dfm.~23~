@@ -32,7 +32,7 @@ object FRM_CadastroBomba: TFRM_CadastroBomba
       Top = 1
       Width = 777
       Height = 469
-      ActivePage = TBS_Consulta
+      ActivePage = TBS_Cadastro
       Align = alClient
       TabOrder = 0
       ExplicitWidth = 742
@@ -45,7 +45,7 @@ object FRM_CadastroBomba: TFRM_CadastroBomba
           Width = 769
           Height = 441
           Align = alClient
-          DataSource = DTS_Combustivel
+          DataSource = DTS_Bomba
           Options = [dgTitles, dgIndicator, dgColumnResize, dgColLines, dgRowLines, dgTabs, dgConfirmDelete, dgCancelOnExit, dgTitleClick, dgTitleHotTrack]
           TabOrder = 0
           TitleFont.Charset = DEFAULT_CHARSET
@@ -53,6 +53,7 @@ object FRM_CadastroBomba: TFRM_CadastroBomba
           TitleFont.Height = -11
           TitleFont.Name = 'Tahoma'
           TitleFont.Style = []
+          OnDblClick = DBG_BombaDblClick
           Columns = <
             item
               Expanded = False
@@ -63,9 +64,9 @@ object FRM_CadastroBomba: TFRM_CadastroBomba
             end
             item
               Expanded = False
-              FieldName = 'VALOR'
-              Title.Caption = 'Valor'
-              Width = 94
+              FieldName = 'DESCTANQUE'
+              Title.Caption = 'Tanque'
+              Width = 180
               Visible = True
             end>
         end
@@ -92,9 +93,9 @@ object FRM_CadastroBomba: TFRM_CadastroBomba
           object Label2: TLabel
             Left = 8
             Top = 64
-            Width = 28
+            Width = 40
             Height = 13
-            Caption = 'Valor:'
+            Caption = 'Tanque:'
           end
           object DBE_Descricao: TDBEdit
             Left = 8
@@ -102,16 +103,19 @@ object FRM_CadastroBomba: TFRM_CadastroBomba
             Width = 313
             Height = 21
             DataField = 'DESCRICAO'
-            DataSource = DTS_Combustivel
+            DataSource = DTS_Bomba
             TabOrder = 0
           end
-          object DBE_Valor: TDBEdit
+          object DBL_Tanque: TDBLookupComboBox
             Left = 8
             Top = 83
             Width = 313
             Height = 21
-            DataField = 'VALOR'
-            DataSource = DTS_Combustivel
+            DataField = 'ID_TANQUE'
+            DataSource = DTS_Bomba
+            KeyField = 'CODIGO_ID'
+            ListField = 'DESCRICAO'
+            ListSource = DTS_Tanque
             TabOrder = 1
           end
         end
@@ -285,6 +289,7 @@ object FRM_CadastroBomba: TFRM_CadastroBomba
           97433FF9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F9F99743
           3FFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
           00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+        OnClick = SPB_GravarClick
       end
       object SPB_Cancelar: TSpeedButton
         Left = 368
@@ -336,6 +341,7 @@ object FRM_CadastroBomba: TFRM_CadastroBomba
           5120205B590D3F6D1401000B546D3E2F2B281A15112D6D420600000B3A606D4E
           312B2023396D510A060000000B3D546D665B5B656D420A0600000000000B0C33
           474F4C3C16060600000000000000000B0B0B0B0B0B0000000000}
+        OnClick = SPB_CancelarClick
       end
       object SPB_Sair: TSpeedButton
         Left = 660
@@ -372,38 +378,82 @@ object FRM_CadastroBomba: TFRM_CadastroBomba
       end
     end
   end
-  object FDQ_Combustivel: TFDQuery
+  object FDQ_Bomba: TFDQuery
     Connection = DTM_Modulo.FDConnection
     UpdateOptions.AssignedValues = [uvAutoCommitUpdates]
     UpdateOptions.AutoCommitUpdates = True
     SQL.Strings = (
-      'select combustivel.codigo_id,'
-      '       combustivel.descricao,'
-      '       combustivel.valor'
+      'select bomba.codigo_id,'
+      '       bomba.descricao,'
+      '       bomba.id_tanque'
       ''
-      'from combustivel')
-    Left = 373
-    Top = 161
-    object FDQ_CombustivelCODIGO_ID: TIntegerField
+      'from bomba')
+    Left = 376
+    Top = 169
+    object FDQ_BombaCODIGO_ID: TIntegerField
       FieldName = 'CODIGO_ID'
       Origin = 'CODIGO_ID'
       ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
-    object FDQ_CombustivelDESCRICAO: TStringField
+    object FDQ_BombaDESCRICAO: TStringField
       FieldName = 'DESCRICAO'
       Origin = 'DESCRICAO'
       Size = 100
     end
-    object FDQ_CombustivelVALOR: TFloatField
-      FieldName = 'VALOR'
-      Origin = 'VALOR'
-      DisplayFormat = '##,000'
+    object FDQ_BombaID_TANQUE: TIntegerField
+      FieldName = 'ID_TANQUE'
+      Origin = 'ID_TANQUE'
+      Required = True
+    end
+    object FDQ_BombaDESCTANQUE: TStringField
+      FieldKind = fkLookup
+      FieldName = 'DESCTANQUE'
+      LookupDataSet = FDQ_Tanque
+      LookupKeyFields = 'CODIGO_ID'
+      LookupResultField = 'DESCRICAO'
+      KeyFields = 'ID_TANQUE'
+      Size = 100
+      Lookup = True
     end
   end
-  object DTS_Combustivel: TDataSource
-    DataSet = FDQ_Combustivel
+  object DTS_Bomba: TDataSource
+    DataSet = FDQ_Bomba
     Left = 373
+    Top = 233
+  end
+  object FDQ_Tanque: TFDQuery
+    Connection = DTM_Modulo.FDConnection
+    UpdateOptions.AssignedValues = [uvAutoCommitUpdates]
+    UpdateOptions.AutoCommitUpdates = True
+    SQL.Strings = (
+      'select tanque.codigo_id,'
+      '       tanque.descricao,'
+      '       tanque.id_combustivel'
+      ''
+      'from tanque')
+    Left = 477
+    Top = 177
+    object FDQ_TanqueCODIGO_ID: TIntegerField
+      FieldName = 'CODIGO_ID'
+      Origin = 'CODIGO_ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object FDQ_TanqueDESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+      Origin = 'DESCRICAO'
+      Size = 10
+    end
+    object FDQ_TanqueID_COMBUSTIVEL: TIntegerField
+      FieldName = 'ID_COMBUSTIVEL'
+      Origin = 'ID_COMBUSTIVEL'
+      Required = True
+    end
+  end
+  object DTS_Tanque: TDataSource
+    DataSet = FDQ_Tanque
+    Left = 477
     Top = 233
   end
 end

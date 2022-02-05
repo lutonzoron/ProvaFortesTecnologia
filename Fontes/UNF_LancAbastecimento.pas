@@ -85,9 +85,27 @@ uses UNF_FDQueryHelper, UNF_MODULO;
 
 procedure TFRM_LancAbastecimento.BTN_LancarClick(Sender: TObject);
 begin
+   BTN_Lancar.SetFocus;
+
+   if(FDQ_AbastecimentoID_BOMBA.IsNull)then
+   begin
+      MessageBox(Handle, 'Necessário selecionar uma bomba!', 'Sistema Gerenciador de Posto', MB_ICONEXCLAMATION + MB_OK);
+      DBLC_Bomba.SetFocus;
+      exit;
+   end;
+
+   if(FDQ_AbastecimentoQUANTIDADE_LITROS.IsNull)then
+   begin
+      MessageBox(Handle, 'Necessário inserir uma quantidade!', 'Sistema Gerenciador de Posto', MB_ICONEXCLAMATION + MB_OK);
+      DBE_Quantidade.SetFocus;
+      exit;
+   end;
+
    FDQ_Abastecimento.Post;
    FDQ_Abastecimento.Refresh;
+   FDQ_Bomba.First;
    FDQ_Abastecimento.Append;
+   FDQ_AbastecimentoID_BOMBA.AsInteger := FDQ_BombaCODIGO_ID.AsInteger;
    DBLC_Bomba.SetFocus;
 end;
 
